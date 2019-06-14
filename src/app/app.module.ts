@@ -3,17 +3,25 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { MedicalFormComponent } from './document-forms/medical-form/medical-form.component';
 import { NonMedicalFormComponent } from './document-forms/non-medical-form/non-medical-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 
+import { DocumentUploadComponent } from './document-upload/document-upload.component'
+
+
 @NgModule({
   declarations: [
     AppComponent,
+
     MedicalFormComponent,
     NonMedicalFormComponent,
-    HomeComponent
+    HomeComponent,
+
+    DocumentUploadComponent
+
   ],
   imports: [
     BrowserModule,
@@ -22,6 +30,6 @@ import { HomeComponent } from './home/home.component';
     ReactiveFormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, DocumentUploadComponent]
 })
 export class AppModule { }
