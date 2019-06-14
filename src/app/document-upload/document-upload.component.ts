@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { DocumentType } from './../shared/document-type.enum';
+import { saveAs } from 'file-saver/FileSaver';
 
 @Component({
     selector: 'app-document-upload',
@@ -10,10 +11,16 @@ export class DocumentUploadComponent {
     private document: File;
     public documentType: DocumentType;
     public manualSelection: boolean;
+    public documentName: string;
+    public documentTypes = [];
     @Output() documentUploadEmitter: EventEmitter<any>;
 
     constructor() {
         this.documentUploadEmitter = new EventEmitter<any>();
+        this.documentTypes = [
+            { value: '1', label: 'Medical' },
+            { value: '2', label: 'Non-Medical' }
+        ];
     }
 
     public handleFileInput(files: FileList) {
@@ -26,8 +33,8 @@ export class DocumentUploadComponent {
     }
 
     private copyFileToTypeFolder() {
-
-        // this.document = 
+        // const blob = new Blob([document], { type: 'application/pdf' });
+        // saveAs(document, `./../../assets/pdf/${'testDoc'}`);
     }
 
     private identifyFileTypeFromBarcode() {
@@ -43,6 +50,6 @@ export class DocumentUploadComponent {
     }
 
     public submit() {
-        this.documentUploadEmitter.emit({ documentSelected: this.document, documentType: this.documentType });
+        //save the file from here
     }
 }

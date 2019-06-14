@@ -1,8 +1,24 @@
-<div class="card" style="width: 100%;">
+<form class="card" style="width: 100%;">
     <div class="card-body">
         <h5 class="card-title">Upload Document</h5>
-        <input type="file" accept=".pdf" (change)="handleFileInput($event.target.files)">
+        <div class="file-field md-form">
+            <div mdbBtn color="primary" size="sm" class="btn btn-primary" mdbWavesEffect>
+                <input type="file" accept=".pdf" (change)="handleFileInput($event.target.files)">
+            </div>
+            <div class="file-path-wrapper">
+                <span>Document Name</span>
+                <input class="file-path" type="text" placeholder="Enter Document Name">
+            </div>
+        </div>
         <p *ngIf="manualSelection" class="card-text">Cannot detect the type of form from barcode, please select the form type manually.</p>
+        <!-- <div>
+            <label>Document Type: </label>
+            <select (change)="changeType($event.target.value)">
+                <option *ngFor="let type of documentTypes" value={{documentType}}>
+                    {{type.name}}
+                </option>
+            </select>
+        </div> -->
         <button [disabled]="!documentType" type="button" class="btn btn-primary" (click)="submit()">Upload Document</button>
     </div>
-</div>
+</form>
