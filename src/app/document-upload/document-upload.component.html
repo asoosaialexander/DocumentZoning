@@ -1,0 +1,9 @@
+<div>
+    <input type="file" accept=".pdf" (change)="handleFileInput($event.target.files)">
+</div>
+<div *ngIf="manualSelection">
+    Cannot detect the type of form from barcode, please select the form type manually
+</div>
+<div *ngIf="documentType">
+    <button id="submitButton" type="button" class="btn btn-primary" (click)="submit()">Next>></button>
+</div>
