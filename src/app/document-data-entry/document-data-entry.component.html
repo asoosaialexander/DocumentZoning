@@ -1,0 +1,49 @@
+<div class="container-fluid no-gutters">
+  <div class="row">
+    <div class="col-5">
+      <div class="card">
+        <div class="card-header">
+          Online Form
+        </div>
+        <div class="card-body">
+          <app-medical-form></app-medical-form>
+          <!-- <div class="row">
+            <div class="col-6">Purpose of Insurance</div>
+            <div class="col-6">
+              <input type="text" (focus)="onFocus('PurposeOfInsurance')">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">Name</div>
+            <div class="col-6">
+              <input type="text" (focus)="onFocus('Name')">
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="col-7" style="position: fixed;left:540px">
+
+      <div class="row no-gutters">
+        <div class="card col-12">
+          <div class="card-header">
+            Selected View
+          </div>
+          <div class="card-body">
+            <img id='newImg' />
+          </div>
+        </div>
+      </div>
+      <div class="row no-gutters">
+        <div class="card col-12">
+          <div class="card-header">
+            Document View
+          </div>
+          <div class="card-body" style="overflow: scroll;height:400px;">
+            <canvas id="the-canvas"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
