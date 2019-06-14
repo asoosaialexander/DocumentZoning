@@ -8,8 +8,8 @@ import { DocumentType } from './../shared/document-type.enum';
 })
 export class DocumentUploadComponent {
     private document: File;
-    private documentType: DocumentType;
-    private manualSelection: boolean;
+    public documentType: DocumentType;
+    public manualSelection: boolean;
     @Output() documentUploadEmitter: EventEmitter<any>;
 
     constructor() {
