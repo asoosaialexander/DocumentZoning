@@ -6,9 +6,9 @@ import { MedicalFormComponent } from './document-forms/medical-form/medical-form
 import { NonMedicalFormComponent } from './document-forms/non-medical-form/non-medical-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
-import { DocumentUploadComponent } from './document-upload/document-upload.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { DocumentDataEntryComponent } from './document-data-entry/document-data-entry.component';
+import { DocumentUploadComponent } from './document-upload/document-upload.component';
 
 @NgModule({
   declarations: [
@@ -16,9 +16,9 @@ import { DocumentDataEntryComponent } from './document-data-entry/document-data-
     MedicalFormComponent,
     NonMedicalFormComponent,
     HomeComponent,
-    DocumentUploadComponent,
     NavbarComponent,
-    DocumentDataEntryComponent
+    DocumentDataEntryComponent,
+    DocumentUploadComponent
   ],
   imports: [
     BrowserModule,
@@ -27,6 +27,6 @@ import { DocumentDataEntryComponent } from './document-data-entry/document-data-
     ReactiveFormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent, NavbarComponent, DocumentUploadComponent, DocumentDataEntryComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
