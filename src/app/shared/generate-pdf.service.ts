@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NonMedicalFieldMapping, MedicalFieldMapping }
-  from '../document-data-entry/FieldMapData';
+import { NonMedicalFieldMapping, MedicalFieldMapping } from '../document-data-entry/FieldMapData';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +8,15 @@ export class GeneratePdfService {
 
   constructor() { }
 
-  generatePdf(fileName: string, field: string) {
+  generatePdf(fileName: string, field: string, type?: string) {
+    type = type || 'non-medical'
     var url = '../assets/pdf/' + fileName;
-    let map = NonMedicalFieldMapping.find(x => x.name == field);
+    let map;
+    if (type === 'non-medical') {
+      map = NonMedicalFieldMapping.find(x => x.name == field);
+    } else {
+      map = MedicalFieldMapping.find(x => x.name == field);
+    }
     var pdfjsLib = window['pdfjs-dist/build/pdf'];
     pdfjsLib.GlobalWorkerOptions.workerSrc = './node_modules/pdfjs-dist/build/pdf.worker.min.js';
 
@@ -19,7 +24,7 @@ export class GeneratePdfService {
     loadingTask.promise.then(function (pdf) {
       console.log('PDF loaded');
 
-      var pageNumber = map.page;
+      var pageNumber = map.page || 1;
       pdf.getPage(pageNumber).then(function (page) {
         console.log('Page loaded');
 

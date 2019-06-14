@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { GeneratePdfService } from 'src/app/shared/generate-pdf.service';
 
 
 @Component({
@@ -23,7 +24,14 @@ export class MedicalFormComponent implements OnInit {
     proposalType: new FormControl('')
   });
 
-  constructor() { }
+  constructor(private generatePdfService: GeneratePdfService) {
+  }
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
+
+  onFocus(field: string) {
+    console.log(`${field} is focused`);
+    this.generatePdfService.generatePdf("bajaj_alliance_medical.pdf", field, 'medical');
+  }
 }
