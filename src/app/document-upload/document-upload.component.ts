@@ -11,36 +11,31 @@ import { DocumentService } from '../shared/document.service';
 })
 export class DocumentUploadComponent {
     private document: File;
-    public documentType: DocumentType;
+    public documentToUpload: DocumentDetails;
     public manualSelection: boolean;
-    public documentName: string;
     public documentTypes = [];
     @Output() documentUploadEmitter: EventEmitter<any>;
 
     constructor(private documentService: DocumentService) {
         this.documentUploadEmitter = new EventEmitter<any>();
+        this.documentToUpload = new DocumentDetails();
+
         this.documentTypes = [
-            { value: '1', label: 'Medical' },
-            { value: '2', label: 'Non-Medical' }
+            { value: 1, label: 'Medical' },
+            { value: 2, label: 'Non-Medical' }
         ];
     }
 
     public handleFileInput(files: FileList) {
         this.document = files.item(0);
-        this.copyFileToTypeFolder();
         this.identifyFileTypeFromBarcode();
-        if (!this.documentType) {
+        if (!this.documentToUpload.typeId) {
             this.setManualSelectionOfFileType();
         }
     }
 
-    private copyFileToTypeFolder() {
-        // const blob = new Blob([document], { type: 'application/pdf' });
-        // saveAs(document, `./../../assets/pdf/${'testDoc'}`);
-    }
-
     private identifyFileTypeFromBarcode() {
-        this.documentType = null;
+        this.documentToUpload.typeId = null;
         this.manualSelection = false;
 
         //write code here to identify file type from document barcode and set type to this.fileType
@@ -48,7 +43,12 @@ export class DocumentUploadComponent {
 
     private setManualSelectionOfFileType() {
         this.manualSelection = true;
-        this.documentType = DocumentType.medical;
+        this.changeType(DocumentType.medical);
+    }
+
+    public changeType(event: number) {
+        this.documentToUpload.typeId = +event;
+        this.documentToUpload.typeName = this.documentTypes.find(s => s.value === this.documentToUpload.typeId).label;
     }
 
     public submit() {
@@ -56,22 +56,28 @@ export class DocumentUploadComponent {
         this.documentService.getDocument().subscribe(
             (getDocumentResponse) => {
                 exisitngDocuments = getDocumentResponse;
-
-                const docObject = new DocumentDetails();
                 if (exisitngDocuments && exisitngDocuments.length > 0) {
-                    docObject.id = Math.max.apply(Math, exisitngDocuments.map(function (o) { return o.id; })) + 1;
+                    this.documentToUpload.id = Math.max.apply(Math, exisitngDocuments.map(function (o) { return o.id; })) + 1;
                 } else {
-                    docObject.id = 1
+                    this.documentToUpload.id = 1
                 }
-                docObject.displayName = this.documentName;
-                docObject.typeId = this.documentType;
-                docObject.location = 'asd';
-                exisitngDocuments.push(docObject);
-
+                exisitngDocuments.push(this.documentToUpload);
+                //         this.uploadDocument();
                 this.documentService.updateDocument(exisitngDocuments).subscribe(
                     (updateDocumentResponse) => {
-                        this.document = null;
+                        this.documentToUpload = new DocumentDetails();
+                    },
+                    (updateDocumentError) => {
                     })
+            },
+            (getDocumentError) => {
             })
+    }
+
+    private uploadDocument() {
+        // this.documentService.uploadDocument(this.document, this.documentToUpload).subscribe(
+        //     (uploadDocumentResponse) => {
+        //         this.documentToUpload.location = 'location';
+        //     })
     }
 }
