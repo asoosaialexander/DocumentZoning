@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { GeneratePdfService } from 'src/app/shared/generate-pdf.service';
+import { DocumentDetails } from './../../shared/document-details.model';
+import { DocumentService } from '../../shared/document.service';
 
 
 @Component({
@@ -24,7 +26,8 @@ export class MedicalFormComponent implements OnInit {
     proposalType: new FormControl('')
   });
 
-  constructor(private generatePdfService: GeneratePdfService) {
+  constructor(private generatePdfService: GeneratePdfService,
+    private documentService: DocumentService) {
   }
 
   ngOnInit() {
@@ -35,7 +38,24 @@ export class MedicalFormComponent implements OnInit {
     this.generatePdfService.generatePdf("bajaj_alliance_medical.pdf", field, 'medical');
   }
 
-  submitForm(){
-    alert(this.medForm.controls["firstname"].value);
+  submitForm() {
+    let exisitngDocuments: DocumentDetails[];
+    this.documentService.getDocument().subscribe(
+      (getDocumentResponse) => {
+        exisitngDocuments = getDocumentResponse;
+        const documentToUpdate = exisitngDocuments.find(s => s.location === "bajaj_alliance_medical.pdf");
+        if (documentToUpdate) {
+          documentToUpdate.data = this.medForm;
+        }
+        this.documentService.updateDocument(exisitngDocuments).subscribe(
+          (updateDocumentResponse) => {
+            alert('Document Updated Successfully');
+          },
+          (updateDocumentError) => {
+          })
+      },
+      (getDocumentError) => {
+      })
   }
+
 }
