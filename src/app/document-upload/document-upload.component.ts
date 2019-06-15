@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { DocumentType } from './../shared/document-type.enum';
 import { saveAs } from 'file-saver/FileSaver';
+import { DocumentDetails } from './../shared/document-details.model';
+import { DocumentService } from '../shared/document.service';
 
 @Component({
     selector: 'app-document-upload',
@@ -15,7 +17,7 @@ export class DocumentUploadComponent {
     public documentTypes = [];
     @Output() documentUploadEmitter: EventEmitter<any>;
 
-    constructor() {
+    constructor(private documentService: DocumentService) {
         this.documentUploadEmitter = new EventEmitter<any>();
         this.documentTypes = [
             { value: '1', label: 'Medical' },
@@ -50,6 +52,30 @@ export class DocumentUploadComponent {
     }
 
     public submit() {
-        //save the file from here
+        let exisitngDocuments: any;
+        this.documentService.getDocument().subscribe(
+            (getDocumentResponse) => {
+                exisitngDocuments = getDocumentResponse;
+
+                const docObject = new DocumentDetails();
+                docObject.id = 10;
+                docObject.displayName = 'test document';
+                docObject.typeId = 1;
+                docObject.location = 'asd';
+                exisitngDocuments.push(docObject);
+
+                this.documentService.updateDocument(exisitngDocuments).subscribe(
+                    (updateDocumentResponse) => {
+
+                    },
+                    (updateDocumentError) => {
+
+                    })
+            },
+            (getDocumentError) => {
+
+            }
+        )
+
     }
 }
