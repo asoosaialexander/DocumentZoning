@@ -34,4 +34,8 @@ export class MedicalFormComponent implements OnInit {
     console.log(`${field} is focused`);
     this.generatePdfService.generatePdf("bajaj_alliance_medical.pdf", field, 'medical');
   }
+
+  submitForm(){
+    alert(this.medForm.controls["firstname"].value);
+  }
 }
