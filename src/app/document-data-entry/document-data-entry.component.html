@@ -1,19 +1,17 @@
 <div class="container-fluid no-gutters">
   <div class="row">
     <div class="col-5">
-      <app-medical-form></app-medical-form>
-      <div class="row">
-            <div class="col-6">Purpose of Insurance</div>
-            <div class="col-6">
-              <input type="text" (focus)="onFocus('PurposeOfInsurance')">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-6">Name</div>
-            <div class="col-6">
-              <input type="text" (focus)="onFocus('Name')">
-            </div>
-          </div>
+      Form Type:
+      <select class='form-control form-control-sm' [(ngModel)]="formType" style="width:300px">
+        <option value="MedicalForm">Medical Form</option>
+        <option value="NonMedicalForm">Non Medical Form</option>
+      </select><br>
+      <div *ngIf="formType === 'MedicalForm'">
+          <app-medical-form></app-medical-form>
+      </div>
+      <div *ngIf="formType === 'NonMedicalForm'">
+          <app-non-medical-form></app-non-medical-form>
+      </div>
     </div>
     <div class="col-7" style="position: fixed;left:540px">
 

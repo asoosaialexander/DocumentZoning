@@ -8,6 +8,8 @@ import { GeneratePdfService } from '../shared/generate-pdf.service';
 })
 export class DocumentDataEntryComponent implements OnInit {
 
+  formType:string="NonMedicalForm";
+
   constructor(private generatePdfService: GeneratePdfService) {
   }
 
