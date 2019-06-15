@@ -11,10 +11,10 @@ export class DocumentService {
     constructor(private http: HttpClient) { }
 
     public getDocument(): Observable<any> {
-        return this.http.get('./assets/document-details.json');
+        return this.http.get('http://localhost:3000/');
     }
 
     public updateDocument(documentDetails: any): Observable<any> {
-        return this.http.post('./assets/document-details.json', documentDetails);
+        return this.http.post('http://localhost:3000/', documentDetails);
     }
 }

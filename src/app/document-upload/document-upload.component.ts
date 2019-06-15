@@ -52,30 +52,26 @@ export class DocumentUploadComponent {
     }
 
     public submit() {
-        let exisitngDocuments: any;
+        let exisitngDocuments: DocumentDetails[];
         this.documentService.getDocument().subscribe(
             (getDocumentResponse) => {
                 exisitngDocuments = getDocumentResponse;
 
                 const docObject = new DocumentDetails();
-                docObject.id = 10;
-                docObject.displayName = 'test document';
-                docObject.typeId = 1;
+                if (exisitngDocuments && exisitngDocuments.length > 0) {
+                    docObject.id = Math.max.apply(Math, exisitngDocuments.map(function (o) { return o.id; })) + 1;
+                } else {
+                    docObject.id = 1
+                }
+                docObject.displayName = this.documentName;
+                docObject.typeId = this.documentType;
                 docObject.location = 'asd';
                 exisitngDocuments.push(docObject);
 
                 this.documentService.updateDocument(exisitngDocuments).subscribe(
                     (updateDocumentResponse) => {
-
-                    },
-                    (updateDocumentError) => {
-
+                        this.document = null;
                     })
-            },
-            (getDocumentError) => {
-
-            }
-        )
-
+            })
     }
 }
