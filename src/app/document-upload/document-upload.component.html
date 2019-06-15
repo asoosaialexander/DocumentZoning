@@ -1,24 +1,26 @@
 <form class="card" style="width: 100%;">
     <div class="card-body">
         <h5 class="card-title">Upload Document</h5>
-        <div class="file-field md-form">
-            <div mdbBtn color="primary" size="sm" class="btn btn-primary" mdbWavesEffect>
-                <input type="file" accept=".pdf" (change)="handleFileInput($event.target.files)">
-            </div>
-            <div class="file-path-wrapper">
-                <span>Document Name</span>
-                <input class="file-path" type="text" placeholder="Enter Document Name">
-            </div>
+        <div mdbBtn color="primary" size="sm" class="btn btn-primary" mdbWavesEffect>
+            <input type="file" accept=".pdf" (change)="handleFileInput($event.target.files)">
         </div>
         <p *ngIf="manualSelection" class="card-text">Cannot detect the type of form from barcode, please select the form type manually.</p>
-        <!-- <div>
+        <div *ngIf="manualSelection">
             <label>Document Type: </label>
             <select (change)="changeType($event.target.value)">
-                <option *ngFor="let type of documentTypes" value={{documentType}}>
-                    {{type.name}}
+                <option *ngFor="let type of documentTypes" value={{type.value}}>
+                    {{type.label}}
                 </option>
             </select>
-        </div> -->
-        <button [disabled]="!documentType" type="button" class="btn btn-primary" (click)="submit()">Upload Document</button>
+        </div>
+        <div *ngIf="!manualSelection">
+            <label>Document Type: </label>{{documentToUpload.typeName}}
+        </div>
+        <div class="file-path-wrapper">
+            <span>Document Name</span>
+            <input trim [(ngModel)]="documentToUpload.displayName" name="displayName" class="file-path" type="text" placeholder="Enter Document Name"
+                required>
+        </div>
+        <button [disabled]="!documentToUpload.typeId || !documentToUpload.displayName" type="button" class="btn btn-primary" (click)="submit()">Upload Document</button>
     </div>
 </form>

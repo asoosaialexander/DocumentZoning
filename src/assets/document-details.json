@@ -1,28 +1,29 @@
-[{
-    "id": 1,
-    "typeId": 1,
-    "displayName":"",
-    "location": "",
-    "uploadUser": "",
-    "data": {
-      "name": "rekhil",
-      "dataUser": ""
+[
+    {
+        "id": 1,
+        "typeId": 1,
+        "displayName": "",
+        "location": "",
+        "uploadUser": "",
+        "data": {
+            "name": "rekhil",
+            "dataUser": ""
+        }
+    },
+    {
+        "id": 2,
+        "typeId": 2,
+        "displayName": "",
+        "location": "",
+        "uploadUser": "",
+        "data": {
+            "name": "soosai",
+            "dataUser": ""
+        }
+    },
+    {
+        "id": 3,
+        "typeId": 2,
+        "location": ""
     }
-  },
-  {
-    "id": 2,
-    "typeId": 2,
-    "displayName":"",
-    "location": "",
-    "uploadUser": "",
-    "data": {
-      "name": "soosai",
-      "dataUser": ""
-    }
-  },
-  {
-    "id": 3,
-    "typeId": 2,
-    "location": ""
-  }
 ]
