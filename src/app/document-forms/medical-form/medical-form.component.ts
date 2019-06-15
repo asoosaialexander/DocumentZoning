@@ -40,19 +40,32 @@ export class MedicalFormComponent implements OnInit {
 
   submitForm() {
     let exisitngDocuments: DocumentDetails[];
+    const data = {
+      applicationNumber: this.medForm.controls.applicationNumber.value,
+      uin: this.medForm.controls.uin.value,
+      gender: this.medForm.controls.gender.value,
+      firstname: this.medForm.controls.firstname.value,
+      lastname: this.medForm.controls.lastname.value,
+      email: this.medForm.controls.email.value,
+      village: this.medForm.controls.village.value,
+      state: this.medForm.controls.state.value,
+      pincode: this.medForm.controls.pincode.value,
+      addressType: this.medForm.controls.addressType.value,
+      proposalType: this.medForm.controls.proposalType.value
+    };
     this.documentService.getDocument().subscribe(
       (getDocumentResponse) => {
         exisitngDocuments = getDocumentResponse;
         const documentToUpdate = exisitngDocuments.find(s => s.location === "bajaj_alliance_medical.pdf");
         if (documentToUpdate) {
-          documentToUpdate.data = this.medForm;
+          documentToUpdate.data = data;
+          this.documentService.updateDocument(exisitngDocuments).subscribe(
+            (updateDocumentResponse) => {
+              alert('Document Updated Successfully');
+            },
+            (updateDocumentError) => {
+            })
         }
-        this.documentService.updateDocument(exisitngDocuments).subscribe(
-          (updateDocumentResponse) => {
-            alert('Document Updated Successfully');
-          },
-          (updateDocumentError) => {
-          })
       },
       (getDocumentError) => {
       })
