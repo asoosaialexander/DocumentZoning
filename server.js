@@ -3,14 +3,26 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const fs = require('fs');
+const multipart = require('connect-multiparty');
+const multipartMiddleware = multipart({ uploadDir: './src/assets/pdf' });
 
 const app = express()
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     res.header('Access-Control-Allow-Methods', 'POST');
     next();
+});
+
+app.post('/upload', multipartMiddleware, (req, res) => {
+    console.log(res)
+    res.json({
+        'message': 'File uploaded successfully'
+    });
 });
 
 app.get('/', (req, res) => {
