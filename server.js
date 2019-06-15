@@ -19,7 +19,6 @@ app.use(function (req, res, next) {
 });
 
 app.post('/upload', multipartMiddleware, (req, res) => {
-    console.log(res)
     res.json({
         'message': 'File uploaded successfully'
     });
@@ -28,8 +27,7 @@ app.post('/upload', multipartMiddleware, (req, res) => {
 app.get('/', (req, res) => {
     fs.readFile('./src/assets/document-details.json', (err, data) => {
         if (err) throw err;
-        let student = JSON.parse(data);
-        res.send(student)
+        res.send(JSON.parse(data))
     });
 });
 
