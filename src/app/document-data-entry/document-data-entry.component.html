@@ -2,18 +2,19 @@
   <div class="row">
     <div class="col-5">
       <app-medical-form></app-medical-form>
+      <!-- <div class="row">
+        <div class="col-6">Purpose of Insurance</div>
+        <div class="col-6">
+          <input type="text" (focus)="onFocus('PurposeOfInsurance')">
+        </div>
+      </div>
       <div class="row">
-            <div class="col-6">Purpose of Insurance</div>
-            <div class="col-6">
-              <input type="text" (focus)="onFocus('PurposeOfInsurance')">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-6">Name</div>
-            <div class="col-6">
-              <input type="text" (focus)="onFocus('Name')">
-            </div>
-          </div>
+        <div class="col-6">Name</div>
+        <div class="col-6">
+          <input type="text" (focus)="onFocus('Name')">
+        </div>
+      </div> -->
+      <app-non-medical-form></app-non-medical-form>
     </div>
     <div class="col-7" style="position: fixed;left:540px">
 
