@@ -1,1 +1,98 @@
-<h2>Non Medical Form</h2>
+<div class="card">
+  <div class="card-header">
+    Non Medical Form
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Non Medical Form</h5>
+    <div class="row">
+      <form [formGroup]="nonMedForm">
+        <h4>Proposal Details</h4>
+        <div class="form-group">
+          <label for="applicationNumber">Application Number</label>
+          <input type="text" class="form-control" id="applicationNumber" aria-describedby="applicationNumber"
+            placeholder="Application Number" (focus)="onFocus('applicationNumber')" formControlName="applicationNumber">
+        </div>
+
+        <div class="form-group">
+          <label for="uin">UIN</label>
+          <input type="text" class="form-control" id="uin" aria-describedby="uin" placeholder="UIN"
+            (focus)="onFocus('uin')" formControlName="uin">
+        </div>
+
+        <div class="form-group">
+          <label for="someid">Proposal Type</label>
+          <br>
+          <div class="form-check form-check-inline" id="someid">
+            <input class="form-check-input" type="radio" (focus)="onFocus('proposalType')"
+              formControlName="proposalType" name="proposalType" value="Individual">Individual
+            <input class="form-check-input" type="radio" (focus)="onFocus('proposalType')"
+              formControlName="proposalType" name="proposalType" value="Joint Life">Joint Life
+            <input class="form-check-input" type="radio" (focus)="onFocus('proposalType')"
+              formControlName="proposalType" name="proposalType" value="Employer Employee">Employer Employee
+          </div>
+        </div>
+        <h4>Personal Details</h4>
+
+        <div class="form-group">
+          <label for="firstname">First Name</label>
+          <input type="text" class="form-control" id="firstname" aria-describedby="firstname" placeholder="First Name"
+            (focus)="onFocus('firstname')" formControlName="firstname">
+        </div>
+
+        <div class="form-group">
+          <label for="lastname">Last Name</label>
+          <input type="text" class="form-control" id="lastname" aria-describedby="lastname" placeholder="Last Name"
+            (focus)="onFocus('lastname')" formControlName="lastname">
+        </div>
+
+        <div class="form-group">
+          <label>Gender</label>
+          <br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" (focus)="onFocus('gender')" formControlName="gender" type="radio"
+              name="gender" value="male">Male
+            <input class="form-check-input" (focus)="onFocus('gender')" formControlName="gender" type="radio"
+              name="gender" value="female">Female
+          </div>
+        </div>
+
+        <!-- <div class="form-group">
+          <label for="email">Email ID</label>
+          <input type="text" class="form-control" name="email" id="email" aria-describedby="applicationNumber"
+            placeholder="Email ID" (focus)="onFocus('email')" formControlName="email">
+        </div> -->
+        <h4>Current Mailing Address</h4>
+
+        <!-- <div class="form-group">
+          <label>Address Type</label>
+          <br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" (focus)="onFocus('addressType')" formControlName="addressType" type="radio"
+              name="addressType" value="Residential">Residential
+            <input class="form-check-input" (focus)="onFocus('addressType')" formControlName="addressType" type="radio"
+              name="addressType" value="Business">Business
+          </div>
+        </div> -->
+
+        <div class="form-group">
+          <label for="pincode">Pincode</label>
+          <input type="number" class="form-control" id="pincode" aria-describedby="pincode" placeholder="Pincode"
+            (focus)="onFocus('pincode')" formControlName="pincode">
+        </div>
+
+        <div class="form-group">
+          <label for="Village">Village</label>
+          <input type="text" class="form-control" id="Village" aria-describedby="Village" placeholder="Village"
+            (focus)="onFocus('village')" formControlName="village">
+        </div>
+
+        <div class="form-group">
+          <label for="State">State</label>
+          <input type="text" class="form-control" id="State" aria-describedby="Village" placeholder="State"
+            (focus)="onFocus('state')" formControlName="state">
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
