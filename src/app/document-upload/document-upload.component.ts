@@ -26,8 +26,8 @@ export class DocumentUploadComponent {
         ];
     }
 
-    public handleFileInput(files: FileList) {
-        this.document = files.item(0);
+    public handleFileInput(event: any) {
+        this.document = event.target.files.item(0);
         this.identifyFileTypeFromBarcode();
         if (!this.documentToUpload.typeId) {
             this.setManualSelectionOfFileType();
@@ -62,7 +62,19 @@ export class DocumentUploadComponent {
                     this.documentToUpload.id = 1
                 }
                 exisitngDocuments.push(this.documentToUpload);
-                //         this.uploadDocument();
+                this.uploadDocument(exisitngDocuments);
+            },
+            (getDocumentError) => {
+            })
+    }
+
+    private uploadDocument(exisitngDocuments: any[]) {
+        const fileName = 'document_' + this.documentToUpload.id + '.pdf';
+        let formData = new FormData();
+        formData.append("uploads[]", this.document, this.document.name);
+        this.documentService.uploadDocument(formData).subscribe(
+            (uploadDocumentResponse) => {
+                this.documentToUpload.location = fileName;
                 this.documentService.updateDocument(exisitngDocuments).subscribe(
                     (updateDocumentResponse) => {
                         this.documentToUpload = new DocumentDetails();
@@ -70,14 +82,8 @@ export class DocumentUploadComponent {
                     (updateDocumentError) => {
                     })
             },
-            (getDocumentError) => {
-            })
-    }
-
-    private uploadDocument() {
-        // this.documentService.uploadDocument(this.document, this.documentToUpload).subscribe(
-        //     (uploadDocumentResponse) => {
-        //         this.documentToUpload.location = 'location';
-        //     })
+            (uploadDocumentError) => {
+                const error = uploadDocumentError;
+            });
     }
 }
